@@ -54,23 +54,6 @@
 .contacts-item + .contacts-item {
   margin-left: 40px;
 }
-/* .contacts-item::before {
-  content: "";
-  margin-right: 10px;
-  display: inline-block;
-  background-repeat: no-repeat;
-}
-.contact-email::before {
-  height: 11.2px;
-  width: 16px;
-  background-image: url(../images/header/e-mail.svg);
-}
-.contact-tel::before {
-  height: 14.942px;
-  width: 10px;
-  background-image: url(../images/header/phone.svg);
-} */
-
 /* SVG sprite для иконок хэдера */
 .email-icon {
   width: 16px;
@@ -239,29 +222,7 @@
   width: 70px;
   height: 70px;
 }
-/* .description-item::before {
-  content: "";
-  display: block;
-  height: 120px;
-  background-color: var(--secondary-bg-color);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 70px;
-  border-radius: 4px;
-  margin-bottom: 30px;
-}
-.icon-antenna::before {
-  background-image: url(../images/description/antenna.svg);
-}
-.icon-clock::before {
-  background-image: url(../images/description/clock.svg);
-}
-.icon-diagram::before {
-  background-image: url(../images/description/diagram.svg);
-}
-.icon-astronaut::before {
-  background-image: url(../images/description/astronaut.svg);
-} */
+
 .description-item:not(:last-child) {
   margin-right: 30px;
 }
@@ -476,14 +437,15 @@ footer {
   background-color: var(--footer-bg-color);
   border: 1px solid var(--footer-line-color);
   border-radius: 4px;
+  padding-left: 16px;
 }
 .footer-btn {
   min-width: 200px;
   width: 100%;
   min-height: 50px;
   filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.15));
-  background-color: var(--accent-color);
-  color: var(--text-button-color);
+   background-color: var(--primary-bg-color);
+  color: var(--secondary-text-color);
   transition: 0.3s;
   border-radius: 4px;
   font-size: 16px;
@@ -498,21 +460,33 @@ footer {
   align-items: center;
   border: 1px solid transparent;
   text-decoration: none;
+  cursor: pointer;
 }
-/* Разобраться, как изменить цвет иконки в кнопке при ховере */
+.footer-submit {
+  width: 24px;
+  height: 24px;
+  margin-left: 10px;
+  --color1: var(--secondary-text-color);
+}
 .footer-btn:hover,
 .footer-btn:focus {
-  background-color: var(--primary-bg-color);
-  color: var(--secondary-text-color);
+  background-color: var(--accent-color);
+  color: var(--text-button-color);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.footer-btn::after {
+/* Разобраться, как изменить цвет иконки в кнопке при ховере */
+.footer-btn:hover .footer-submit,
+.footer-btn:focus .footer-submit{
+  --color1: var( --text-color);
+}
+/* .footer-btn::after {
   content: "";
   width: 24px;
   height: 24px;
   margin-left: 10px;
   background-image: url(../images/footer/btn-icon.svg);
   background-size: cover;
-}
+} */
 .copyrights {
   display: flex;
   justify-content: center;
@@ -545,6 +519,7 @@ footer {
   align-items: center;
   justify-content: center;
   color: var(--secondary-text-color);
+  cursor: pointer;
 }
 .portfolio-filters .portfolio-btn:not(:last-child) {
   margin-right: 10px;
@@ -554,6 +529,8 @@ footer {
   background-color: var(--accent-color);
   color: var(--hover-text-color);
   border: 1px solid transparent;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
 }
 .portfolio-filters .current-btn {
   background-color: var(--accent-color);
@@ -570,51 +547,52 @@ footer {
 .portfolio-card {
   width: calc(100% / 3);
   padding: 15px;
-}
-.portfolio-card:hover .card-text {
-  /* opacity: 1; */
-}
-.card-items {
-  background-color: var(--primary-bg-color);
-  border: 1px solid var(--card-border-color);
-  overflow: hidden;
-}
-.card-items:hover {
-  filter: drop-shadow(0px 1px 0.5px rgba(0, 0, 0, 0.12))
-    drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.06))
-    drop-shadow(0.968px 3.881px 3px rgba(0, 0, 0, 0.16));
-  transform: translateY(-3px);
-  cursor: pointer;
+  list-style: none;
 }
 .card-img {
+  display: block;
+}
+.portfolio-link {
+  text-decoration: none;
+  display: block;
+}
+.card-items {
   position: relative;
- 
+  overflow: hidden;
 }
-.card-img::before {
-  display: inline-block;
-  content: "";
-  width: 100%;
-  height: 100%;
-  background-color: rgba(46, 139, 86, 0.781);
-  position: absolute;
-  /* opacity: 0; */
-  transform: translateX(-100%);
-  transition: transform 250ms var(--timing-function);
+
+.card-items:focus-within .card-text,
+.card-items:hover .card-text {
+  transform: translateY(0);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.card-img:hover::before,
-.card-img:hover .card-text {
-  opacity: 1;
-  transform: translateX(0);
+.portfolio-link {
+  background-color: var(--primary-bg-color);
+  border: 1px solid var(--card-border-color);
+}
+.portfolio-link:focus-within,
+.portfolio-link:hover {
+  box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.16), 0px 4px 4px rgba(0, 0, 0, 0.06),
+    0px 1px 1px rgba(0, 0, 0, 0.12);
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .card-text {
   position: absolute;
-  top: 63px;
-  right: 24px;
-  left: 24px;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 63px 24px;
   font-size: 18px;
   line-height: 1.75;
-  color: seashell;
-  opacity: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--card-hover-color);
+  color: var(--text-color);
+  opacity: 1;
+  transform: translateY(100%);
+  transition-property: transform;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 .card-title {
   font-size: 18px;
@@ -622,17 +600,17 @@ footer {
   line-height: 2.25;
   color: var(--secondary-text-color);
   font-weight: 700;
-  margin-top: 30px;
-  margin-bottom: 25px;
-  margin-left: 25px;
+  margin-top: 20px;
+  margin-bottom: 4px;
+  margin-left: 24px;
 }
 .card-subtitle {
   font-size: 16px;
   line-height: 1.9;
   color: var(--primary-text-color);
   font-weight: 400;
-  margin-left: 25px;
-  margin-bottom: 25px;
+  margin-left: 24px;
+  margin-bottom: 20px;
 }
 
 /* Модальное окно */
